@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Task01.Entities
 {
+    #region part1
     // convention way
     //internal class Course
     //{
@@ -35,7 +36,8 @@ namespace Task01.Entities
     //    public string? Description { get; set; }
     //    [NotNull]
     //    public int Top_ID { get; set; }
-    //}
+    //} 
+    #endregion
 
     // using Fluent API's
     internal class Course
@@ -44,7 +46,14 @@ namespace Task01.Entities
         public int Duration { get; set; }
         public string Name { get; set; }
         public string? Description { get; set; }
-        public string Top_ID { get; set; }
+
+        [ForeignKey(nameof(topic))]
+        public int Top_ID { get; set; }
+
+        public Topic topic { get; set; }
+
+        public List<Stud_Course> students { get; set; }
+        public List<Course_Inst> instructors { get; set; }
     }
 
 }

@@ -49,7 +49,11 @@ namespace Task01.Entities
         public string LName { get; set; }
         public string Address { get; set; }
         public int? Age { get; set; }
+        [ForeignKey(nameof(department))]
         public int Dep_Id { get; set; }
+        public Department department { get; set; }
+
+        public List<Stud_Course> courses { get; set; }
     }
 
 }

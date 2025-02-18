@@ -13,10 +13,9 @@ namespace Task01_.Validations
     {
         public void Configure(EntityTypeBuilder<Course_Inst> CI)
         {
-            CI.HasKey(CI => new { CI.Course_ID, CI.Course_InstID });
+            CI.HasKey(CI => new {CI.CourseID , CI.InstructorID});
             CI.Property(CI => CI.evaluation)
-              .IsRequired();
+              .IsRequired();  
         }
-
     }
 }

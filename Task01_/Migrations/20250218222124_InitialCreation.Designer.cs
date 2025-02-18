@@ -12,8 +12,8 @@ using Task01_.Context;
 namespace Task01_.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250213201135_initial creation")]
-    partial class initialcreation
+    [Migration("20250218222124_InitialCreation")]
+    partial class InitialCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,27 +47,30 @@ namespace Task01_.Migrations
                         .HasColumnType("VARCHAR")
                         .HasColumnName("Name");
 
-                    b.Property<string>("Top_ID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Top_ID")
+                        .HasColumnType("int");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Top_ID");
 
                     b.ToTable("Courses");
                 });
 
             modelBuilder.Entity("Task01.Entities.Course_Inst", b =>
                 {
-                    b.Property<int>("Course_ID")
+                    b.Property<int>("CourseID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Course_InstID")
+                    b.Property<int>("InstructorID")
                         .HasColumnType("int");
 
                     b.Property<int>("evaluation")
                         .HasColumnType("int");
 
-                    b.HasKey("Course_ID", "Course_InstID");
+                    b.HasKey("CourseID", "InstructorID");
+
+                    b.HasIndex("InstructorID");
 
                     b.ToTable("Course_Insts");
                 });
@@ -95,6 +98,9 @@ namespace Task01_.Migrations
                         .HasColumnName("DepartmentName");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("Ins_ID")
+                        .IsUnique();
 
                     b.ToTable("Departments");
                 });
@@ -132,21 +138,25 @@ namespace Task01_.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("Dept_ID");
+
                     b.ToTable("instructors");
                 });
 
             modelBuilder.Entity("Task01.Entities.Stud_Course", b =>
                 {
-                    b.Property<int>("Stud_CourseID")
+                    b.Property<int>("StudentID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Course_ID")
+                    b.Property<int>("CourseID")
                         .HasColumnType("int");
 
                     b.Property<double?>("Grade")
                         .HasColumnType("float");
 
-                    b.HasKey("Stud_CourseID", "Course_ID");
+                    b.HasKey("StudentID", "CourseID");
+
+                    b.HasIndex("CourseID");
 
                     b.ToTable("Stud_Courses");
                 });
@@ -184,6 +194,8 @@ namespace Task01_.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("Dep_Id");
+
                     b.ToTable("Students");
                 });
 
@@ -204,6 +216,112 @@ namespace Task01_.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("topics");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Course", b =>
+                {
+                    b.HasOne("Task01.Entities.Topic", "topic")
+                        .WithMany("Courses")
+                        .HasForeignKey("Top_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("topic");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Course_Inst", b =>
+                {
+                    b.HasOne("Task01.Entities.Course", null)
+                        .WithMany("instructors")
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Task01.Entities.Instructor", null)
+                        .WithMany("courses")
+                        .HasForeignKey("InstructorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Task01.Entities.Department", b =>
+                {
+                    b.HasOne("Task01.Entities.Instructor", "instructor")
+                        .WithOne("Department")
+                        .HasForeignKey("Task01.Entities.Department", "Ins_ID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("instructor");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Instructor", b =>
+                {
+                    b.HasOne("Task01.Entities.Department", "department")
+                        .WithMany("Instructors")
+                        .HasForeignKey("Dept_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("department");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Stud_Course", b =>
+                {
+                    b.HasOne("Task01.Entities.Course", null)
+                        .WithMany("students")
+                        .HasForeignKey("CourseID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Task01.Entities.Student", null)
+                        .WithMany("courses")
+                        .HasForeignKey("StudentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Task01.Entities.Student", b =>
+                {
+                    b.HasOne("Task01.Entities.Department", "department")
+                        .WithMany("Students")
+                        .HasForeignKey("Dep_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("department");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Course", b =>
+                {
+                    b.Navigation("instructors");
+
+                    b.Navigation("students");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Department", b =>
+                {
+                    b.Navigation("Instructors");
+
+                    b.Navigation("Students");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Instructor", b =>
+                {
+                    b.Navigation("Department")
+                        .IsRequired();
+
+                    b.Navigation("courses");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Student", b =>
+                {
+                    b.Navigation("courses");
+                });
+
+            modelBuilder.Entity("Task01.Entities.Topic", b =>
+                {
+                    b.Navigation("Courses");
                 });
 #pragma warning restore 612, 618
         }

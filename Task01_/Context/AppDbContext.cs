@@ -124,6 +124,8 @@ namespace Task01_.Context
             modelBuilder.ApplyConfiguration(new InstructorValidations());
             modelBuilder.ApplyConfiguration(new Stud_CourseValidations());
             modelBuilder.ApplyConfiguration(new TopicValidations());
+
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

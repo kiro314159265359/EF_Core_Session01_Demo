@@ -18,6 +18,9 @@ namespace Task01_.Validations
              .IsRequired()
              .HasMaxLength(200)
              .HasColumnName("TopicName");
+            T.HasMany(C => C.Courses)
+             .WithOne(T => T.topic)
+             .HasForeignKey(T => T.Top_ID);
         }
     }
 }

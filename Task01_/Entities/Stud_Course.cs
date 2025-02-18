@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Task01.Entities
 {
+    #region part1
     //internal class Stud_Course
     //{
     //    public int Stud_CourseID { get; set; }
@@ -25,11 +26,12 @@ namespace Task01.Entities
     //    [Required]
     //    public double Grade { get; set; }
     //}
-    // using Fluent API's
+    // using Fluent API's 
+    #endregion
     internal class Stud_Course
     {
-        public int Stud_CourseID { get; set; }
-        public int Course_ID { get; set; }
+        public int StudentID { get; set; }
+        public int CourseID { get; set; }
         public double? Grade { get; set; }
     }
 }

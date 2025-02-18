@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 namespace Task01.Entities
 {
 
+    #region Part1
     //internal class Department
     //{
     //    public int ID { get; set; } 
@@ -32,15 +33,21 @@ namespace Task01.Entities
     //    public int Ins_ID { get; set; }
     //    [Range(typeof(DateTime), "2000-01-01", "2025-12-31")]
     //    public DateTime HiringDate { get; set; }
-    //}
+    //} 
+    #endregion
 
     // using Fluent API's
     internal class Department
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int Ins_ID { get; set; }
         public DateTime? HiringDate { get; set; }
+
+        [ForeignKey(nameof(instructor))]
+        public int Ins_ID { get; set; } 
+        public List<Student> Students { get; set; }
+        public List<Instructor> Instructors { get; set; }
+        public Instructor instructor { get; set; }
     }
 
 }

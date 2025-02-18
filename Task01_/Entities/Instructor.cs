@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Task01.Entities
 {
+    #region Part1
     //internal class Instructor
     //{
     //    public int ID { get; set; }
@@ -41,7 +42,8 @@ namespace Task01.Entities
     //    [NotNull]
     //    public int Dept_ID { get; set; }
 
-    // using Fluent API's
+    // using Fluent API's 
+    #endregion
 
     internal class Instructor
     {
@@ -51,7 +53,14 @@ namespace Task01.Entities
         public double Salary { get; set; }
         public string? Address { get; set; }
         public double HourRate { get; set; }
+        [ForeignKey(nameof(department))]
         public int Dept_ID { get; set; }
+        [InverseProperty(nameof(department.Instructors))]
+        public Department department { get; set; }
+        [InverseProperty(nameof(department.instructor))]
+        public Department Department { get; set; }
+
+        public List<Course_Inst> courses { get; set; }
     }
 }
 

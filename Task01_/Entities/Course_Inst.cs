@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Task01.Entities
 {
+    #region part1
     //internal class Course_Inst
     //{
     //    public int Course_InstID { get; set; }
@@ -26,13 +27,14 @@ namespace Task01.Entities
     //    [NotNull]
     //    [Column("Eval", TypeName = "int")]
     //    public int evaluation { get; set; }
-    //}
+    //} 
+    #endregion
 
     // using Fluent API's
     internal class Course_Inst
     {
-        public int Course_InstID { get; set; }
-        public int Course_ID { get; set; }
+        public int CourseID { get; set; }
+        public int InstructorID { get; set; }
         public int evaluation { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace Task01.Entities
 {
 
+    #region Part1
     //internal class Topic
     //{
     //   
@@ -26,11 +27,13 @@ namespace Task01.Entities
     //    public string Name { get; set; }
     //}
 
+    #endregion
     // using Fluent API's
     internal class Topic
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public List<Course> Courses { get; set; } = new List<Course>();
     }
 
 }
