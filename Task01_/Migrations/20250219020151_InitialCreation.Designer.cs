@@ -12,7 +12,7 @@ using Task01_.Context;
 namespace Task01_.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250218222124_InitialCreation")]
+    [Migration("20250219020151_InitialCreation")]
     partial class InitialCreation
     {
         /// <inheritdoc />
@@ -88,7 +88,8 @@ namespace Task01_.Migrations
                         .HasColumnType("datetime2")
                         .HasDefaultValueSql("GETDATE()");
 
-                    b.Property<int>("Ins_ID")
+                    b.Property<int?>("Ins_ID")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -121,7 +122,7 @@ namespace Task01_.Migrations
                     b.Property<decimal>("Bonus")
                         .HasColumnType("money");
 
-                    b.Property<int>("Dept_ID")
+                    b.Property<int?>("Dept_ID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("HourRate")
@@ -249,8 +250,7 @@ namespace Task01_.Migrations
                     b.HasOne("Task01.Entities.Instructor", "instructor")
                         .WithOne("Department")
                         .HasForeignKey("Task01.Entities.Department", "Ins_ID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("instructor");
                 });
@@ -259,9 +259,7 @@ namespace Task01_.Migrations
                 {
                     b.HasOne("Task01.Entities.Department", "department")
                         .WithMany("Instructors")
-                        .HasForeignKey("Dept_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Dept_ID");
 
                     b.Navigation("department");
                 });
@@ -285,9 +283,7 @@ namespace Task01_.Migrations
                 {
                     b.HasOne("Task01.Entities.Department", "department")
                         .WithMany("Students")
-                        .HasForeignKey("Dep_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Dep_Id");
 
                     b.Navigation("department");
                 });
@@ -308,8 +304,7 @@ namespace Task01_.Migrations
 
             modelBuilder.Entity("Task01.Entities.Instructor", b =>
                 {
-                    b.Navigation("Department")
-                        .IsRequired();
+                    b.Navigation("Department");
 
                     b.Navigation("courses");
                 });

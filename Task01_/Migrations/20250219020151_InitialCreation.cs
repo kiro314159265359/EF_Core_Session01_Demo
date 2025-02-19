@@ -91,7 +91,7 @@ namespace Task01_.Migrations
                     Salary = table.Column<decimal>(type: "money", nullable: false),
                     address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     HourRate = table.Column<decimal>(type: "money", nullable: false),
-                    Dept_ID = table.Column<int>(type: "int", nullable: false)
+                    Dept_ID = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -100,8 +100,7 @@ namespace Task01_.Migrations
                         name: "FK_instructors_Departments_Dept_ID",
                         column: x => x.Dept_ID,
                         principalTable: "Departments",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(
@@ -123,8 +122,7 @@ namespace Task01_.Migrations
                         name: "FK_Students_Departments_Dep_Id",
                         column: x => x.Dep_Id,
                         principalTable: "Departments",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "ID");
                 });
 
             migrationBuilder.CreateTable(

@@ -45,9 +45,11 @@ namespace Task01.Entities
 
         [ForeignKey(nameof(instructor))]
         public int Ins_ID { get; set; } 
+        public Instructor instructor { get; set; }
+
         public List<Student> Students { get; set; }
         public List<Instructor> Instructors { get; set; }
-        public Instructor instructor { get; set; }
+       
     }
 
 }

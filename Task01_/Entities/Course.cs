@@ -54,6 +54,11 @@ namespace Task01.Entities
 
         public List<Stud_Course> students { get; set; }
         public List<Course_Inst> instructors { get; set; }
+
+        public override string ToString()
+        {
+            return $"Course ID: {ID}, Name: {Name}, Duration: {Duration} hours, Description: {Description ?? "No description available"}, Top_ID: {Top_ID}";
+        }
     }
 
 }

@@ -28,6 +28,7 @@ namespace Task01_.Validations
             S.Property(S => S.Address)
              .HasColumnName("address")
              .IsRequired()
+             .HasMaxLength(50)
              .HasColumnType("NVARCHAR");
             S.Property(S => S.Age)
              .IsRequired(false);

@@ -28,7 +28,7 @@ namespace Task01_.Validations
              .HasColumnName("address")
              .HasMaxLength(200);
             I.Property(I => I.Dept_ID)
-             .IsRequired();
+             .IsRequired(false);
         }
     }
 }

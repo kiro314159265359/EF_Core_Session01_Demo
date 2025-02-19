@@ -133,7 +133,7 @@ namespace Task01_.Context
             optionsBuilder.UseSqlServer("Server = DESKTOP-PEC2QL2\\SQLEXPRESS; Database = App03; Trusted_Connection = True; TrustServerCertificate = True");
         }
 
-        public DbSet<Student> Students { get; set; }
+        public DbSet<Student> students { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Course_Inst> Course_Insts { get; set; }
         public DbSet<Department> Departments { get; set; }

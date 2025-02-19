@@ -54,13 +54,13 @@ namespace Task01.Entities
         public string? Address { get; set; }
         public double HourRate { get; set; }
         [ForeignKey(nameof(department))]
-        public int Dept_ID { get; set; }
+        public int? Dept_ID { get; set; }
         [InverseProperty(nameof(department.Instructors))]
         public Department department { get; set; }
         [InverseProperty(nameof(department.instructor))]
         public Department Department { get; set; }
 
-        public List<Course_Inst> courses { get; set; }
+        public List<Course_Inst>? courses { get; set; }
     }
 }
 

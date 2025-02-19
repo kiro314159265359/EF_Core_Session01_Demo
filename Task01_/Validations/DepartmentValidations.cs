@@ -25,14 +25,17 @@ namespace Task01_.Validations
              .HasDefaultValueSql("GETDATE()");
             D.HasMany(S => S.Students)
              .WithOne(D => D.department)
-             .HasForeignKey(D => D.Dep_Id);
+             .HasForeignKey(D => D.Dep_Id)
+             .IsRequired(false); ;
             D.HasMany(I => I.Instructors)
              .WithOne(D => D.department)
-             .HasForeignKey(D => D.Dept_ID);
+             .HasForeignKey(D => D.Dept_ID)
+             .IsRequired(false);
             D.HasOne(I => I.instructor)
              .WithOne(D => D.Department)
              .HasForeignKey<Department>(D => D.Ins_ID)
-             .OnDelete(DeleteBehavior.Restrict);
+             .OnDelete(DeleteBehavior.Restrict)
+             .IsRequired(false);
         }
     }
 }

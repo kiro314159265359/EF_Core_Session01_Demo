@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace Task01.Entities
 {
+    #region Part1
     //internal class Student
     //{
     //    // 1. By using the convention Default way
@@ -39,7 +40,8 @@ namespace Task01.Entities
     //    public int? Age { get; set; }
     //    [NotNull]
     //    public int Dep_Id { get; set; }
-    //}
+    //} 
+    #endregion
 
     // using Fluent API's
     internal class Student
@@ -54,6 +56,11 @@ namespace Task01.Entities
         public Department department { get; set; }
 
         public List<Stud_Course> courses { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {ID} , Fname: {FName} , Lname:{LName} ,Address: {Address} , Age: {Age},Dep_Id: {Dep_Id}";
+        }
     }
 
 }
